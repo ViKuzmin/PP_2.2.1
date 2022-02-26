@@ -1,10 +1,18 @@
 package hiber.model;
 
+import org.springframework.stereotype.Component;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "cars")
+@Component
 public class Car {
+
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,6 +23,10 @@ public class Car {
 
     @Column
     private int series;
+
+    public User getUser() {
+        return user;
+    }
 
     public Car() {
 
