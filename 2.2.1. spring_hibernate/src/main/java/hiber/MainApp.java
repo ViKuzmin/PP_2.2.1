@@ -16,25 +16,17 @@ public class MainApp {
 
       UserService userService = context.getBean(UserService.class);
 
-      /*userService.add(new User("User1", "Lastname1", "user1@mail.ru"));
-      userService.add(new User("User2", "Lastname2", "user2@mail.ru"));
-      userService.add(new User("User3", "Lastname3", "user3@mail.ru"));
-      userService.add(new User("User4", "Lastname4", "user4@mail.ru"));*/
-
-      /*userService.add(new User("User1", "Lastname1", "user1@mail.ru", new Car("Pupirka", 78)));
-      userService.add(new User("User2", "Lastname2", "user2@mail.ru", new Car("Kefirka", 96)));
-      userService.add(new User("User3", "Lastname3", "user3@mail.ru", new Car("9-ka", 13)));
-      userService.add(new User("User4", "Lastname4", "user4@mail.ru", new Car("Chepirka", 99)));*/
-
       Car car1 = new Car("Pupirka", 78);
       Car car2 = new Car("Kefirka", 96);
       Car car3 = new Car("9-ka", 13);
       Car car4 = new Car("Chepirka", 99);
 
-      userService.add(new User("User1", "Lastname1", "user1@mail.ru", car1));
-      userService.add(new User("User2", "Lastname2", "user2@mail.ru", car2));
-      userService.add(new User("User3", "Lastname3", "user3@mail.ru", car3));
+      userService.add(new User("User1", "Lastname1", "user1@mail.ru", car3));
+      userService.add(new User("User2", "Lastname2", "user2@mail.ru", car1));
+      userService.add(new User("User3", "Lastname3", "user3@mail.ru", car2));
       userService.add(new User("User4", "Lastname4", "user4@mail.ru", car4));
+
+      System.out.println(userService.getUserByCar(car2) + " !!!!!!!!!!!!!!!!!!!!!!");
 
       List<User> users = userService.listUsers();
       for (User user : users) {
@@ -44,7 +36,6 @@ public class MainApp {
          System.out.println("Email = "+user.getEmail());
          System.out.println();
       }
-
       context.close();
    }
 }

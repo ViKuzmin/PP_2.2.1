@@ -8,8 +8,12 @@ import javax.persistence.*;
 @Table(name = "users")
 public class User {
 
+  /* @OneToOne(cascade = CascadeType.ALL)
+   @JoinColumn(name = "cars_id", referencedColumnName = "id")
+   private Car car;*/
+
    @OneToOne(cascade = CascadeType.ALL)
-   @JoinColumn(name = "car_id")
+   @MapsId
    private Car car;
 
    @Id
@@ -29,7 +33,9 @@ public class User {
       return car;
    }
 
-   public User() {}
+   public User() {
+
+   }
    
    public User(String firstName, String lastName, String email) {
       this.firstName = firstName;
@@ -72,5 +78,34 @@ public class User {
 
    public void setEmail(String email) {
       this.email = email;
+   }
+
+   @Override
+   public boolean equals(Object o) {
+      if (this == o) return true;
+      if (o == null || getClass() != o.getClass()) return false;
+
+      User user = (User) o;
+
+      if (firstName != null ? !firstName.equals(user.firstName) : user.firstName != null) return false;
+      if (lastName != null ? !lastName.equals(user.lastName) : user.lastName != null) return false;
+      return email != null ? email.equals(user.email) : user.email == null;
+   }
+
+   @Override
+   public int hashCode() {
+      int result = firstName != null ? firstName.hashCode() : 0;
+      result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+      result = 31 * result + (email != null ? email.hashCode() : 0);
+      return result;
+   }
+
+   @Override
+   public String toString() {
+      return "\nUser{" +
+              "firstName='" + firstName + '\'' +
+              ", lastName='" + lastName + '\'' +
+              ", email='" + email + '\'' +
+              '}';
    }
 }
